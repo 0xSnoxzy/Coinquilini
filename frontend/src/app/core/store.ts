@@ -33,6 +33,18 @@ export class Store {
   private scene = "Antonio";
   private timer: ReturnType<typeof setTimeout> | undefined;
   async init() {
+    try {
+      const res = await fetch("http://localhost:8080/api/auth/me", {
+        credentials: "include",
+      });
+      if (res.ok) {
+        const user = await res.json();
+        const base = this.fixture("Nuovo");
+        this.data.set({ ...base, user });
+      }
+    } catch {
+      // Backend non ancora avviato o nessuna sessione
+    }
     this.ready.set(true);
   }
   private fixture(name: string): Snapshot {
@@ -58,20 +70,47 @@ export class Store {
   }
   async refresh() {
     this.preview(this.scene);
-    this.notify("Anteprima ripristinata.");
+    this.notify("Dati ripristinati.");
   }
   async auth(
-    _register: boolean,
-    _name: string,
-    _email: string,
-    _password: string,
+    register: boolean,
+    name: string,
+    email: string,
+    password: string,
   ) {
-    this.notify(
-      "Modulo grafico: usa i pulsanti dei profili di esempio per esplorare.",
-    );
-    return false;
+    this.error.set("");
+    try {
+      const endpoint = register ? "/api/auth/register" : "/api/auth/login";
+      const body = register ? { name, email, password } : { email, password };
+      const res = await fetch("http://localhost:8080" + endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(body),
+      });
+      const json = await res.json();
+      if (!res.ok) {
+        this.error.set(json.error || "Operazione non riuscita.");
+        return false;
+      }
+      this.notify(register ? "Registrazione effettuata con successo!" : "Accesso effettuato!");
+      const base = this.fixture("Nuovo");
+      this.data.set({ ...base, user: json });
+      this.error.set("");
+      void this.router.navigateByUrl("/");
+      return true;
+    } catch {
+      this.error.set("Impossibile contattare il server backend sulla porta 8080.");
+      return false;
+    }
   }
   async logout() {
+    try {
+      await fetch("http://localhost:8080/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch {}
     this.data.set(null);
     this.error.set("");
     void this.router.navigateByUrl("/");
@@ -81,21 +120,32 @@ export class Store {
     const state = this.data();
     if (!state) return false;
     if (path === "profile/save") {
-      const user = {
-        ...state.user,
-        name: p["name"],
-        color: p["color"],
-        photo: p["photo"],
-      };
-      this.data.set({
-        ...state,
-        user,
-        members: state.members.map((m) =>
-          m.id === user.id ? { ...m, ...user } : m,
-        ),
-      });
-      this.notify("Aspetto aggiornato nell’anteprima; non viene salvato.");
-      return true;
+      try {
+        const res = await fetch("http://localhost:8080/api/profile/save", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(p),
+        });
+        const updated = await res.json();
+        if (!res.ok) {
+          this.error.set(updated.error || "Errore nel salvataggio profilo.");
+          return false;
+        }
+        const user = { ...state.user, ...updated };
+        this.data.set({
+          ...state,
+          user,
+          members: state.members.map((m) =>
+            m.id === user.id ? { ...m, ...user } : m,
+          ),
+        });
+        this.notify("Profilo aggiornato e salvato nel database!");
+        return true;
+      } catch {
+        this.error.set("Errore durante la connessione al server.");
+        return false;
+      }
     }
     if (path === "houses/save") {
       this.data.set({

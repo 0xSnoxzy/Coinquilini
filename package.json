@@ -1,0 +1,8 @@
+{
+  "name": "coinquilini-interfaccia",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "demo": "node scripts/serve-demo.mjs"
+  }
+}
