@@ -1,0 +1,1268 @@
+{
+  "Antonio": {
+    "user": {
+      "id": 1,
+      "name": "Antonio",
+      "email": "antonio@demo.it",
+      "role": "USER",
+      "active": true,
+      "color": "#3d59c9",
+      "photo": ""
+    },
+    "house": {
+      "id": 1,
+      "name": "Casa Prova",
+      "emoji": "🧊",
+      "photo": "",
+      "inviteCode": "PROVA26",
+      "archived": false
+    },
+    "members": [
+      {
+        "id": 1,
+        "name": "Antonio",
+        "email": "antonio@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": "",
+        "membershipId": 1,
+        "membershipRole": "OWNER",
+        "memberActive": true
+      },
+      {
+        "id": 2,
+        "name": "David",
+        "email": "david@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": "",
+        "membershipId": 2,
+        "membershipRole": "MEMBER",
+        "memberActive": true
+      },
+      {
+        "id": 3,
+        "name": "Elisa",
+        "email": "elisa@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": "",
+        "membershipId": 3,
+        "membershipRole": "MEMBER",
+        "memberActive": true
+      },
+      {
+        "id": 4,
+        "name": "Giovanna",
+        "email": "giovanna@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": "",
+        "membershipId": 4,
+        "membershipRole": "MEMBER",
+        "memberActive": true
+      }
+    ],
+    "expenses": [
+      {
+        "id": 1,
+        "houseId": 1,
+        "title": "Spesa al supermercato",
+        "cents": 4800,
+        "paidBy": 1,
+        "createdBy": 1,
+        "date": "__DAY_0__",
+        "category": "Spesa",
+        "shared": true,
+        "shares": [
+          {
+            "userId": 1,
+            "cents": 1200
+          },
+          {
+            "userId": 2,
+            "cents": 1200
+          },
+          {
+            "userId": 3,
+            "cents": 1200
+          },
+          {
+            "userId": 4,
+            "cents": 1200
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "houseId": 1,
+        "title": "Internet",
+        "cents": 3200,
+        "paidBy": 2,
+        "createdBy": 2,
+        "date": "__DAY_0__",
+        "category": "Bollette",
+        "shared": true,
+        "shares": [
+          {
+            "userId": 1,
+            "cents": 800
+          },
+          {
+            "userId": 2,
+            "cents": 800
+          },
+          {
+            "userId": 3,
+            "cents": 800
+          },
+          {
+            "userId": 4,
+            "cents": 800
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "houseId": 1,
+        "title": "Prodotti per il bagno",
+        "cents": 1900,
+        "paidBy": 3,
+        "createdBy": 3,
+        "date": "__DAY_0__",
+        "category": "Casa",
+        "shared": false,
+        "shares": [
+          {
+            "userId": 1,
+            "cents": 950
+          },
+          {
+            "userId": 3,
+            "cents": 950
+          }
+        ]
+      }
+    ],
+    "repayments": [],
+    "items": [
+      {
+        "id": 1,
+        "houseId": 1,
+        "name": "Latte",
+        "quantity": 1,
+        "unit": "litri",
+        "bought": false
+      },
+      {
+        "id": 2,
+        "houseId": 1,
+        "name": "Pasta",
+        "quantity": 2,
+        "unit": "pacchi",
+        "bought": false
+      },
+      {
+        "id": 3,
+        "houseId": 1,
+        "name": "Detersivo",
+        "quantity": 1,
+        "unit": "flaconi",
+        "bought": false
+      }
+    ],
+    "frequent": [
+      {
+        "name": "Caffè",
+        "quantity": 1,
+        "unit": "pacchi",
+        "count": 1
+      },
+      {
+        "name": "Latte",
+        "quantity": 1,
+        "unit": "litri",
+        "count": 1
+      },
+      {
+        "name": "Carta igienica",
+        "quantity": 1,
+        "unit": "confezioni",
+        "count": 1
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "houseId": 1,
+        "title": "Pulisci la cucina",
+        "notes": "Lascia tutto in ordine per il prossimo coinquilino.",
+        "emoji": "🧽",
+        "recurrence": "WEEKLY",
+        "mode": "AUTO",
+        "active": true
+      },
+      {
+        "id": 2,
+        "houseId": 1,
+        "title": "Pulisci il bagno",
+        "notes": "Lascia tutto in ordine per il prossimo coinquilino.",
+        "emoji": "🫧",
+        "recurrence": "WEEKLY",
+        "mode": "AUTO",
+        "active": true
+      },
+      {
+        "id": 3,
+        "houseId": 1,
+        "title": "Sistema il soggiorno",
+        "notes": "Lascia tutto in ordine per il prossimo coinquilino.",
+        "emoji": "🧹",
+        "recurrence": "WEEKLY",
+        "mode": "AUTO",
+        "active": true
+      },
+      {
+        "id": 4,
+        "houseId": 1,
+        "title": "Porta fuori la differenziata",
+        "notes": "Lascia tutto in ordine per il prossimo coinquilino.",
+        "emoji": "♻️",
+        "recurrence": "WEEKLY",
+        "mode": "AUTO",
+        "active": true
+      }
+    ],
+    "turns": [
+      {
+        "id": 1,
+        "taskId": 1,
+        "userId": 1,
+        "due": "__DAY_0__",
+        "done": false,
+        "completedAt": ""
+      },
+      {
+        "id": 2,
+        "taskId": 2,
+        "userId": 2,
+        "due": "__DAY_1__",
+        "done": false,
+        "completedAt": ""
+      },
+      {
+        "id": 3,
+        "taskId": 3,
+        "userId": 3,
+        "due": "__DAY_2__",
+        "done": false,
+        "completedAt": ""
+      },
+      {
+        "id": 4,
+        "taskId": 4,
+        "userId": 4,
+        "due": "__DAY_3__",
+        "done": false,
+        "completedAt": ""
+      },
+      {
+        "id": 90,
+        "taskId": 1,
+        "userId": 1,
+        "due": "__DAY_0__",
+        "done": true,
+        "completedAt": "__DAY_0__T08:26:28.064Z",
+        "titleSnapshot": "Pulisci la cucina",
+        "emojiSnapshot": "🧹"
+      }
+    ],
+    "notices": [
+      {
+        "id": 1,
+        "houseId": 1,
+        "title": "Arriva il tecnico Wi-Fi",
+        "text": "David sarà a casa per aprire al tecnico.",
+        "date": "__DAY_3__",
+        "time": "10:00",
+        "authorId": 2
+      }
+    ],
+    "myBalance": 1850,
+    "settlements": [
+      {
+        "fromUser": 3,
+        "toUser": 1,
+        "cents": 1050
+      },
+      {
+        "fromUser": 4,
+        "toUser": 1,
+        "cents": 800
+      }
+    ],
+    "adminUsers": [],
+    "adminHouses": []
+  },
+  "David": {
+    "user": {
+      "id": 2,
+      "name": "David",
+      "email": "david@demo.it",
+      "role": "USER",
+      "active": true,
+      "color": "#3d59c9",
+      "photo": ""
+    },
+    "house": {
+      "id": 1,
+      "name": "Casa Prova",
+      "emoji": "🧊",
+      "photo": "",
+      "inviteCode": "PROVA26",
+      "archived": false
+    },
+    "members": [
+      {
+        "id": 1,
+        "name": "Antonio",
+        "email": "antonio@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": "",
+        "membershipId": 1,
+        "membershipRole": "OWNER",
+        "memberActive": true
+      },
+      {
+        "id": 2,
+        "name": "David",
+        "email": "david@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": "",
+        "membershipId": 2,
+        "membershipRole": "MEMBER",
+        "memberActive": true
+      },
+      {
+        "id": 3,
+        "name": "Elisa",
+        "email": "elisa@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": "",
+        "membershipId": 3,
+        "membershipRole": "MEMBER",
+        "memberActive": true
+      },
+      {
+        "id": 4,
+        "name": "Giovanna",
+        "email": "giovanna@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": "",
+        "membershipId": 4,
+        "membershipRole": "MEMBER",
+        "memberActive": true
+      }
+    ],
+    "expenses": [
+      {
+        "id": 1,
+        "houseId": 1,
+        "title": "Spesa al supermercato",
+        "cents": 4800,
+        "paidBy": 1,
+        "createdBy": 1,
+        "date": "__DAY_0__",
+        "category": "Spesa",
+        "shared": true,
+        "shares": [
+          {
+            "userId": 1,
+            "cents": 1200
+          },
+          {
+            "userId": 2,
+            "cents": 1200
+          },
+          {
+            "userId": 3,
+            "cents": 1200
+          },
+          {
+            "userId": 4,
+            "cents": 1200
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "houseId": 1,
+        "title": "Internet",
+        "cents": 3200,
+        "paidBy": 2,
+        "createdBy": 2,
+        "date": "__DAY_0__",
+        "category": "Bollette",
+        "shared": true,
+        "shares": [
+          {
+            "userId": 1,
+            "cents": 800
+          },
+          {
+            "userId": 2,
+            "cents": 800
+          },
+          {
+            "userId": 3,
+            "cents": 800
+          },
+          {
+            "userId": 4,
+            "cents": 800
+          }
+        ]
+      }
+    ],
+    "repayments": [],
+    "items": [
+      {
+        "id": 1,
+        "houseId": 1,
+        "name": "Latte",
+        "quantity": 1,
+        "unit": "litri",
+        "bought": false
+      },
+      {
+        "id": 2,
+        "houseId": 1,
+        "name": "Pasta",
+        "quantity": 2,
+        "unit": "pacchi",
+        "bought": false
+      },
+      {
+        "id": 3,
+        "houseId": 1,
+        "name": "Detersivo",
+        "quantity": 1,
+        "unit": "flaconi",
+        "bought": false
+      }
+    ],
+    "frequent": [
+      {
+        "name": "Caffè",
+        "quantity": 1,
+        "unit": "pacchi",
+        "count": 1
+      },
+      {
+        "name": "Latte",
+        "quantity": 1,
+        "unit": "litri",
+        "count": 1
+      },
+      {
+        "name": "Carta igienica",
+        "quantity": 1,
+        "unit": "confezioni",
+        "count": 1
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "houseId": 1,
+        "title": "Pulisci la cucina",
+        "notes": "Lascia tutto in ordine per il prossimo coinquilino.",
+        "emoji": "🧽",
+        "recurrence": "WEEKLY",
+        "mode": "AUTO",
+        "active": true
+      },
+      {
+        "id": 2,
+        "houseId": 1,
+        "title": "Pulisci il bagno",
+        "notes": "Lascia tutto in ordine per il prossimo coinquilino.",
+        "emoji": "🫧",
+        "recurrence": "WEEKLY",
+        "mode": "AUTO",
+        "active": true
+      },
+      {
+        "id": 3,
+        "houseId": 1,
+        "title": "Sistema il soggiorno",
+        "notes": "Lascia tutto in ordine per il prossimo coinquilino.",
+        "emoji": "🧹",
+        "recurrence": "WEEKLY",
+        "mode": "AUTO",
+        "active": true
+      },
+      {
+        "id": 4,
+        "houseId": 1,
+        "title": "Porta fuori la differenziata",
+        "notes": "Lascia tutto in ordine per il prossimo coinquilino.",
+        "emoji": "♻️",
+        "recurrence": "WEEKLY",
+        "mode": "AUTO",
+        "active": true
+      }
+    ],
+    "turns": [
+      {
+        "id": 1,
+        "taskId": 1,
+        "userId": 1,
+        "due": "__DAY_0__",
+        "done": false,
+        "completedAt": ""
+      },
+      {
+        "id": 2,
+        "taskId": 2,
+        "userId": 2,
+        "due": "__DAY_1__",
+        "done": false,
+        "completedAt": ""
+      },
+      {
+        "id": 3,
+        "taskId": 3,
+        "userId": 3,
+        "due": "__DAY_2__",
+        "done": false,
+        "completedAt": ""
+      },
+      {
+        "id": 4,
+        "taskId": 4,
+        "userId": 4,
+        "due": "__DAY_3__",
+        "done": false,
+        "completedAt": ""
+      },
+      {
+        "id": 90,
+        "taskId": 1,
+        "userId": 1,
+        "due": "__DAY_0__",
+        "done": true,
+        "completedAt": "__DAY_0__T08:26:28.064Z",
+        "titleSnapshot": "Pulisci la cucina",
+        "emojiSnapshot": "🧹"
+      }
+    ],
+    "notices": [
+      {
+        "id": 1,
+        "houseId": 1,
+        "title": "Arriva il tecnico Wi-Fi",
+        "text": "David sarà a casa per aprire al tecnico.",
+        "date": "__DAY_3__",
+        "time": "10:00",
+        "authorId": 2
+      }
+    ],
+    "myBalance": 1200,
+    "settlements": [
+      {
+        "fromUser": 4,
+        "toUser": 2,
+        "cents": 1200
+      }
+    ],
+    "adminUsers": [],
+    "adminHouses": []
+  },
+  "Elisa": {
+    "user": {
+      "id": 3,
+      "name": "Elisa",
+      "email": "elisa@demo.it",
+      "role": "USER",
+      "active": true,
+      "color": "#3d59c9",
+      "photo": ""
+    },
+    "house": {
+      "id": 1,
+      "name": "Casa Prova",
+      "emoji": "🧊",
+      "photo": "",
+      "inviteCode": "PROVA26",
+      "archived": false
+    },
+    "members": [
+      {
+        "id": 1,
+        "name": "Antonio",
+        "email": "antonio@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": "",
+        "membershipId": 1,
+        "membershipRole": "OWNER",
+        "memberActive": true
+      },
+      {
+        "id": 2,
+        "name": "David",
+        "email": "david@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": "",
+        "membershipId": 2,
+        "membershipRole": "MEMBER",
+        "memberActive": true
+      },
+      {
+        "id": 3,
+        "name": "Elisa",
+        "email": "elisa@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": "",
+        "membershipId": 3,
+        "membershipRole": "MEMBER",
+        "memberActive": true
+      },
+      {
+        "id": 4,
+        "name": "Giovanna",
+        "email": "giovanna@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": "",
+        "membershipId": 4,
+        "membershipRole": "MEMBER",
+        "memberActive": true
+      }
+    ],
+    "expenses": [
+      {
+        "id": 1,
+        "houseId": 1,
+        "title": "Spesa al supermercato",
+        "cents": 4800,
+        "paidBy": 1,
+        "createdBy": 1,
+        "date": "__DAY_0__",
+        "category": "Spesa",
+        "shared": true,
+        "shares": [
+          {
+            "userId": 1,
+            "cents": 1200
+          },
+          {
+            "userId": 2,
+            "cents": 1200
+          },
+          {
+            "userId": 3,
+            "cents": 1200
+          },
+          {
+            "userId": 4,
+            "cents": 1200
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "houseId": 1,
+        "title": "Internet",
+        "cents": 3200,
+        "paidBy": 2,
+        "createdBy": 2,
+        "date": "__DAY_0__",
+        "category": "Bollette",
+        "shared": true,
+        "shares": [
+          {
+            "userId": 1,
+            "cents": 800
+          },
+          {
+            "userId": 2,
+            "cents": 800
+          },
+          {
+            "userId": 3,
+            "cents": 800
+          },
+          {
+            "userId": 4,
+            "cents": 800
+          }
+        ]
+      }
+    ],
+    "repayments": [],
+    "items": [
+      {
+        "id": 1,
+        "houseId": 1,
+        "name": "Latte",
+        "quantity": 1,
+        "unit": "litri",
+        "bought": false
+      },
+      {
+        "id": 2,
+        "houseId": 1,
+        "name": "Pasta",
+        "quantity": 2,
+        "unit": "pacchi",
+        "bought": false
+      },
+      {
+        "id": 3,
+        "houseId": 1,
+        "name": "Detersivo",
+        "quantity": 1,
+        "unit": "flaconi",
+        "bought": false
+      }
+    ],
+    "frequent": [
+      {
+        "name": "Caffè",
+        "quantity": 1,
+        "unit": "pacchi",
+        "count": 1
+      },
+      {
+        "name": "Latte",
+        "quantity": 1,
+        "unit": "litri",
+        "count": 1
+      },
+      {
+        "name": "Carta igienica",
+        "quantity": 1,
+        "unit": "confezioni",
+        "count": 1
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "houseId": 1,
+        "title": "Pulisci la cucina",
+        "notes": "Lascia tutto in ordine per il prossimo coinquilino.",
+        "emoji": "🧽",
+        "recurrence": "WEEKLY",
+        "mode": "AUTO",
+        "active": true
+      },
+      {
+        "id": 2,
+        "houseId": 1,
+        "title": "Pulisci il bagno",
+        "notes": "Lascia tutto in ordine per il prossimo coinquilino.",
+        "emoji": "🫧",
+        "recurrence": "WEEKLY",
+        "mode": "AUTO",
+        "active": true
+      },
+      {
+        "id": 3,
+        "houseId": 1,
+        "title": "Sistema il soggiorno",
+        "notes": "Lascia tutto in ordine per il prossimo coinquilino.",
+        "emoji": "🧹",
+        "recurrence": "WEEKLY",
+        "mode": "AUTO",
+        "active": true
+      },
+      {
+        "id": 4,
+        "houseId": 1,
+        "title": "Porta fuori la differenziata",
+        "notes": "Lascia tutto in ordine per il prossimo coinquilino.",
+        "emoji": "♻️",
+        "recurrence": "WEEKLY",
+        "mode": "AUTO",
+        "active": true
+      }
+    ],
+    "turns": [
+      {
+        "id": 1,
+        "taskId": 1,
+        "userId": 1,
+        "due": "__DAY_0__",
+        "done": false,
+        "completedAt": ""
+      },
+      {
+        "id": 2,
+        "taskId": 2,
+        "userId": 2,
+        "due": "__DAY_1__",
+        "done": false,
+        "completedAt": ""
+      },
+      {
+        "id": 3,
+        "taskId": 3,
+        "userId": 3,
+        "due": "__DAY_2__",
+        "done": false,
+        "completedAt": ""
+      },
+      {
+        "id": 4,
+        "taskId": 4,
+        "userId": 4,
+        "due": "__DAY_3__",
+        "done": false,
+        "completedAt": ""
+      },
+      {
+        "id": 90,
+        "taskId": 1,
+        "userId": 1,
+        "due": "__DAY_0__",
+        "done": true,
+        "completedAt": "__DAY_0__T08:26:28.064Z",
+        "titleSnapshot": "Pulisci la cucina",
+        "emojiSnapshot": "🧹"
+      }
+    ],
+    "notices": [
+      {
+        "id": 1,
+        "houseId": 1,
+        "title": "Arriva il tecnico Wi-Fi",
+        "text": "David sarà a casa per aprire al tecnico.",
+        "date": "__DAY_3__",
+        "time": "10:00",
+        "authorId": 2
+      }
+    ],
+    "myBalance": -1050,
+    "settlements": [
+      {
+        "fromUser": 3,
+        "toUser": 1,
+        "cents": 1050
+      }
+    ],
+    "adminUsers": [],
+    "adminHouses": []
+  },
+  "Giovanna": {
+    "user": {
+      "id": 4,
+      "name": "Giovanna",
+      "email": "giovanna@demo.it",
+      "role": "USER",
+      "active": true,
+      "color": "#3d59c9",
+      "photo": ""
+    },
+    "house": {
+      "id": 1,
+      "name": "Casa Prova",
+      "emoji": "🧊",
+      "photo": "",
+      "inviteCode": "PROVA26",
+      "archived": false
+    },
+    "members": [
+      {
+        "id": 1,
+        "name": "Antonio",
+        "email": "antonio@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": "",
+        "membershipId": 1,
+        "membershipRole": "OWNER",
+        "memberActive": true
+      },
+      {
+        "id": 2,
+        "name": "David",
+        "email": "david@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": "",
+        "membershipId": 2,
+        "membershipRole": "MEMBER",
+        "memberActive": true
+      },
+      {
+        "id": 3,
+        "name": "Elisa",
+        "email": "elisa@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": "",
+        "membershipId": 3,
+        "membershipRole": "MEMBER",
+        "memberActive": true
+      },
+      {
+        "id": 4,
+        "name": "Giovanna",
+        "email": "giovanna@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": "",
+        "membershipId": 4,
+        "membershipRole": "MEMBER",
+        "memberActive": true
+      }
+    ],
+    "expenses": [
+      {
+        "id": 1,
+        "houseId": 1,
+        "title": "Spesa al supermercato",
+        "cents": 4800,
+        "paidBy": 1,
+        "createdBy": 1,
+        "date": "__DAY_0__",
+        "category": "Spesa",
+        "shared": true,
+        "shares": [
+          {
+            "userId": 1,
+            "cents": 1200
+          },
+          {
+            "userId": 2,
+            "cents": 1200
+          },
+          {
+            "userId": 3,
+            "cents": 1200
+          },
+          {
+            "userId": 4,
+            "cents": 1200
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "houseId": 1,
+        "title": "Internet",
+        "cents": 3200,
+        "paidBy": 2,
+        "createdBy": 2,
+        "date": "__DAY_0__",
+        "category": "Bollette",
+        "shared": true,
+        "shares": [
+          {
+            "userId": 1,
+            "cents": 800
+          },
+          {
+            "userId": 2,
+            "cents": 800
+          },
+          {
+            "userId": 3,
+            "cents": 800
+          },
+          {
+            "userId": 4,
+            "cents": 800
+          }
+        ]
+      }
+    ],
+    "repayments": [],
+    "items": [
+      {
+        "id": 1,
+        "houseId": 1,
+        "name": "Latte",
+        "quantity": 1,
+        "unit": "litri",
+        "bought": false
+      },
+      {
+        "id": 2,
+        "houseId": 1,
+        "name": "Pasta",
+        "quantity": 2,
+        "unit": "pacchi",
+        "bought": false
+      },
+      {
+        "id": 3,
+        "houseId": 1,
+        "name": "Detersivo",
+        "quantity": 1,
+        "unit": "flaconi",
+        "bought": false
+      }
+    ],
+    "frequent": [
+      {
+        "name": "Caffè",
+        "quantity": 1,
+        "unit": "pacchi",
+        "count": 1
+      },
+      {
+        "name": "Latte",
+        "quantity": 1,
+        "unit": "litri",
+        "count": 1
+      },
+      {
+        "name": "Carta igienica",
+        "quantity": 1,
+        "unit": "confezioni",
+        "count": 1
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "houseId": 1,
+        "title": "Pulisci la cucina",
+        "notes": "Lascia tutto in ordine per il prossimo coinquilino.",
+        "emoji": "🧽",
+        "recurrence": "WEEKLY",
+        "mode": "AUTO",
+        "active": true
+      },
+      {
+        "id": 2,
+        "houseId": 1,
+        "title": "Pulisci il bagno",
+        "notes": "Lascia tutto in ordine per il prossimo coinquilino.",
+        "emoji": "🫧",
+        "recurrence": "WEEKLY",
+        "mode": "AUTO",
+        "active": true
+      },
+      {
+        "id": 3,
+        "houseId": 1,
+        "title": "Sistema il soggiorno",
+        "notes": "Lascia tutto in ordine per il prossimo coinquilino.",
+        "emoji": "🧹",
+        "recurrence": "WEEKLY",
+        "mode": "AUTO",
+        "active": true
+      },
+      {
+        "id": 4,
+        "houseId": 1,
+        "title": "Porta fuori la differenziata",
+        "notes": "Lascia tutto in ordine per il prossimo coinquilino.",
+        "emoji": "♻️",
+        "recurrence": "WEEKLY",
+        "mode": "AUTO",
+        "active": true
+      }
+    ],
+    "turns": [
+      {
+        "id": 1,
+        "taskId": 1,
+        "userId": 1,
+        "due": "__DAY_0__",
+        "done": false,
+        "completedAt": ""
+      },
+      {
+        "id": 2,
+        "taskId": 2,
+        "userId": 2,
+        "due": "__DAY_1__",
+        "done": false,
+        "completedAt": ""
+      },
+      {
+        "id": 3,
+        "taskId": 3,
+        "userId": 3,
+        "due": "__DAY_2__",
+        "done": false,
+        "completedAt": ""
+      },
+      {
+        "id": 4,
+        "taskId": 4,
+        "userId": 4,
+        "due": "__DAY_3__",
+        "done": false,
+        "completedAt": ""
+      },
+      {
+        "id": 90,
+        "taskId": 1,
+        "userId": 1,
+        "due": "__DAY_0__",
+        "done": true,
+        "completedAt": "__DAY_0__T08:26:28.064Z",
+        "titleSnapshot": "Pulisci la cucina",
+        "emojiSnapshot": "🧹"
+      }
+    ],
+    "notices": [
+      {
+        "id": 1,
+        "houseId": 1,
+        "title": "Arriva il tecnico Wi-Fi",
+        "text": "David sarà a casa per aprire al tecnico.",
+        "date": "__DAY_3__",
+        "time": "10:00",
+        "authorId": 2
+      }
+    ],
+    "myBalance": -2000,
+    "settlements": [
+      {
+        "fromUser": 4,
+        "toUser": 1,
+        "cents": 800
+      },
+      {
+        "fromUser": 4,
+        "toUser": 2,
+        "cents": 1200
+      }
+    ],
+    "adminUsers": [],
+    "adminHouses": []
+  },
+  "Admin": {
+    "user": {
+      "id": 5,
+      "name": "Amministratore",
+      "email": "admin@demo.it",
+      "role": "ADMIN",
+      "active": true,
+      "color": "#3d59c9",
+      "photo": ""
+    },
+    "house": null,
+    "members": [],
+    "expenses": [],
+    "repayments": [],
+    "items": [],
+    "frequent": [],
+    "tasks": [],
+    "turns": [],
+    "notices": [],
+    "myBalance": 0,
+    "settlements": [],
+    "adminUsers": [
+      {
+        "id": 1,
+        "name": "Antonio",
+        "email": "antonio@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": ""
+      },
+      {
+        "id": 2,
+        "name": "David",
+        "email": "david@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": ""
+      },
+      {
+        "id": 3,
+        "name": "Elisa",
+        "email": "elisa@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": ""
+      },
+      {
+        "id": 4,
+        "name": "Giovanna",
+        "email": "giovanna@demo.it",
+        "role": "USER",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": ""
+      },
+      {
+        "id": 5,
+        "name": "Amministratore",
+        "email": "admin@demo.it",
+        "role": "ADMIN",
+        "active": true,
+        "color": "#3d59c9",
+        "photo": ""
+      }
+    ],
+    "adminHouses": [
+      {
+        "id": 1,
+        "name": "Casa Prova",
+        "emoji": "🧊",
+        "photo": "",
+        "inviteCode": "PROVA26",
+        "archived": false
+      }
+    ]
+  },
+  "Nuovo": {
+    "user": {
+      "id": 6,
+      "name": "Nuovo coinquilino",
+      "email": "esempio@demo.it",
+      "role": "USER",
+      "active": true,
+      "color": "#3d59c9",
+      "photo": ""
+    },
+    "house": null,
+    "members": [],
+    "expenses": [],
+    "repayments": [],
+    "items": [],
+    "frequent": [],
+    "tasks": [],
+    "turns": [],
+    "notices": [],
+    "myBalance": 0,
+    "settlements": [],
+    "adminUsers": [],
+    "adminHouses": []
+  }
+}
