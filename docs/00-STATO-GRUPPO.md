@@ -9,7 +9,7 @@ e aggiornarlo **nello stesso commit di ogni modifica**, anche di documentazione.
 - Base condivisa: main `301fde5`, con fondamenta JDBC e autenticazione BCrypt.
 - Branch del traguardo: `codex/casa-inviti-snapshot`.
 - Backend casa/inviti/snapshot: **implementato e testato**.
-- Collegamento Angular: **implementato e collaudato; incluso in questo commit**.
+- Collegamento Angular: **implementato e collaudato**.
 - Verifiche locali del traguardo completo: **87 test passati**, build frontend,
   packaging/avvio backend e collaudo UI con due utenti riusciti.
 - **Prova sul PC di David: DA ESEGUIRE.** Il risultato su quel computer
@@ -65,8 +65,8 @@ iniziale. Non serve attendere tutta l'applicazione per integrare una milestone.
 | `020ecbb` | Antonio | BCrypt, sessioni, profilo e 33 test, integrati in main. | Collegare casa e inviti reali. |
 | `301fde5` | Antonio | Contratto fondamenta allineato a BCrypt; base main. | Implementare M2a e snapshot iniziale. |
 | `34617fb` — feat(houses): creazione inviti e snapshot con test PostgreSQL | Antonio | API casa, DAO estesi, snapshot, vista pubblica e 26 test nuovi. | Collegare il frontend e verificare sul PC di David. |
-| `questo commit` — feat(store): collega casa e membri alle API reali | Antonio | Store reale, ricaricamento, aggiornamento e demo separata. | Prova su PC David, poi review e merge. |
-| `previsto nel commit documentazione` — docs: registro condiviso e collaudo sul PC di David | Antonio | Registro, regola di aggiornamento e guide riproducibili. | David esegue la checklist e il gruppo registra l'esito. |
+| `5e8e6c0` — feat(store): collega casa e membri alle API reali | Antonio | Store reale, ricaricamento, aggiornamento e demo separata. | Prova su PC David, poi review e merge. |
+| `questo commit` — docs: registro condiviso e collaudo sul PC di David | Antonio | Registro, regola di aggiornamento e guide riproducibili. | David esegue la checklist e il gruppo registra l'esito. |
 
 «Questo commit» indica il commit che contiene quella versione del documento.
 Al successivo aggiornamento completare il riferimento precedente con l'hash

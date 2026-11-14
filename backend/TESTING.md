@@ -90,14 +90,15 @@ schema `auth_test_<UUID>` nella stessa istanza PostgreSQL separata usata dalla
 suite delle fondamenta; al termine elimina esclusivamente il proprio schema.
 Non richiede le credenziali del database applicativo e non ne modifica i dati.
 
-Il comando `mvn --batch-mode --no-transfer-progress test` esegue entrambe le
-suite. Per eseguire solo quella dell'autenticazione:
+Il comando `mvn --batch-mode --no-transfer-progress test` esegue tutte le
+suite disponibili. Per eseguire solo quella dell'autenticazione:
 
 ```powershell
 mvn --batch-mode --no-transfer-progress '-Dtest=AuthIntegrationTest' test
 ```
 
-Il 14 novembre 2026, con Java 21.0.3 e PostgreSQL 18, sono passati **61 test**:
+Le due suite iniziali, verificate il 14 novembre 2026 con Java 21.0.3 e
+PostgreSQL 18, comprendono **61 test**:
 33 di autenticazione e 28 delle fondamenta, con **0 fallimenti, 0 errori e
 0 saltati**. La suite dell'autenticazione verifica:
 
@@ -114,3 +115,30 @@ Il 14 novembre 2026, con Java 21.0.3 e PostgreSQL 18, sono passati **61 test**:
 MockMvc verifica gli endpoint senza avviare un browser. Il collaudo manuale
 delle pagine Angular e del cookie nel browser rimane una verifica aggiuntiva;
 vedi [documentazione dell'autenticazione](../docs/04-AUTENTICAZIONE.md).
+
+## Test di creazione casa, ingresso e snapshot
+
+`HouseIntegrationTest` usa uno schema PostgreSQL isolato `house_test_<UUID>`
+con le stesse variabili `TEST_DATABASE_*`. Copre creazione atomica casa/OWNER,
+join normalizzato, utenti disattivati, inviti non validi/case archiviate,
+riattivazione di una membership storica, isolamento multi-casa, snapshot senza
+credenziali, rollback e collisioni del codice. Verifica anche due creazioni
+e due ingressi concorrenti per lo stesso utente.
+
+Il 14 novembre 2026 la suite ha completato **26 test passati**. Con le due
+suite precedenti il totale corrente è **87 test, 0 fallimenti, 0 errori,
+0 saltati**, su Java 21.0.3 e PostgreSQL 18.
+
+```powershell
+mvn --batch-mode --no-transfer-progress '-Dtest=HouseIntegrationTest' test
+```
+
+La prova manuale dal browser ha verificato creazione, ingresso del secondo
+utente, lista membri, ricaricamento e aggiornamento del profilo.
+Limiti dello snapshot iniziale e passaggi riproducibili sono in
+[Casa, inviti e snapshot](../docs/07-CASA-INVITI-SNAPSHOT.md).
+
+Per installazione e collaudo sul PC di David usare il
+[Registro del gruppo](../docs/00-STATO-GRUPPO.md), che mantiene anche i prossimi
+task di ogni membro. L'esito del collaudo su quel computer deve essere
+registrato separatamente dalle verifiche locali già concluse.
