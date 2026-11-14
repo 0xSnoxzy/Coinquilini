@@ -78,6 +78,39 @@ Il 14 novembre 2026 la suite ha completato **28 test, 0 fallimenti, 0 errori,
 - compatibilità dei controller esistenti per registrazione, login, sessione,
   aggiornamento del profilo e logout.
 
-Il test dei controller è una verifica di regressione del codice esistente,
-non una certificazione di sicurezza dell'autenticazione. Le modifiche
-all'autenticazione sviluppate separatamente richiedono i propri test.
+Il test dei controller in `FoundationsTest` è una verifica di regressione.
+La copertura specifica dell'autenticazione è nella suite descritta di seguito.
+
+## Test dell'autenticazione
+
+Responsabile dell'autenticazione: **Antonio (snoxzy / 0xSnoxzy)**.
+
+`AuthIntegrationTest` usa MockMvc, Spring Boot e i DAO JDBC reali. Crea uno
+schema `auth_test_<UUID>` nella stessa istanza PostgreSQL separata usata dalla
+suite delle fondamenta; al termine elimina esclusivamente il proprio schema.
+Non richiede le credenziali del database applicativo e non ne modifica i dati.
+
+Il comando `mvn --batch-mode --no-transfer-progress test` esegue entrambe le
+suite. Per eseguire solo quella dell'autenticazione:
+
+```powershell
+mvn --batch-mode --no-transfer-progress '-Dtest=AuthIntegrationTest' test
+```
+
+Il 14 novembre 2026, con Java 21.0.3 e PostgreSQL 18, sono passati **61 test**:
+33 di autenticazione e 28 delle fondamenta, con **0 fallimenti, 0 errori e
+0 saltati**. La suite dell'autenticazione verifica:
+
+- hash BCrypt persistito e assenza di password/hash nelle risposte e nei modelli JSON;
+- normalizzazione email, duplicati e due registrazioni concorrenti;
+- rifiuto di password errate, in chiaro o hash malformati e account disattivati;
+- rinnovo dell'ID sessione e conservazione del solo `userId`;
+- rifiuto delle vecchie sessioni, utenti inesistenti o disattivati dopo il login;
+- rilettura dell'utente dal database e logout ripetuto;
+- aggiornamento parziale del profilo, validazioni e protezione di ruolo, email e password;
+- significatività degli spazi nella password e limite di 72 byte anche con Unicode;
+- richieste CORS con credenziali dalle origini Angular esistenti.
+
+MockMvc verifica gli endpoint senza avviare un browser. Il collaudo manuale
+delle pagine Angular e del cookie nel browser rimane una verifica aggiuntiva;
+vedi [documentazione dell'autenticazione](../docs/04-AUTENTICAZIONE.md).

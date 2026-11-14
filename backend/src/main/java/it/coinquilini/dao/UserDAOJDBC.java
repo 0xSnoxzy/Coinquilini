@@ -32,14 +32,8 @@ public class UserDAOJDBC implements UserDAO {
 
     @Override
     public User findByEmail(String email) {
-        String query = "SELECT * FROM app_user WHERE LOWER(email) = LOWER(?)";
+        String query = "SELECT * FROM app_user WHERE LOWER(TRIM(email)) = ?";
         return first(jdbc.query(query, this::mapUser, email));
-    }
-
-    @Override
-    public User findByEmailAndPassword(String email, String password) {
-        String query = "SELECT * FROM app_user WHERE LOWER(email) = LOWER(?) AND password = ?";
-        return first(jdbc.query(query, this::mapUser, email, password));
     }
 
     @Override

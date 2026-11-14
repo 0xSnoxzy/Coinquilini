@@ -1,5 +1,7 @@
 package it.coinquilini.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Data Transfer Object (DTO) per l'entità Utente.
  * Riferimento slide: "Persistence - JDBC - Pattern DAO", slide 10 e 14 (classe Student).
@@ -10,6 +12,8 @@ public class User {
     private Long id;
     private String name;
     private String email;
+    // La colonna esistente "password" contiene esclusivamente l'hash BCrypt.
+    @JsonIgnore
     private String password;
     private String role;
     private boolean active;
@@ -56,6 +60,7 @@ public class User {
         this.email = email;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
