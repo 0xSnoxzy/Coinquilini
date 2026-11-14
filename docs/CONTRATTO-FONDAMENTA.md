@@ -2,9 +2,13 @@
 
 ## Ambito e compatibilità
 
-Backend Java 21, Spring Boot 3.3.4, PostgreSQL e DAO JDBC. Nessun controller o
-collegamento frontend aggiunto. `app_user` resta invariata, inclusa la colonna
-esistente `password`: questa attività non migra credenziali né modifica utenti.
+Backend Java 21, Spring Boot 3.3.4, PostgreSQL e DAO JDBC. Le fondamenta non
+aggiungono controller per case/appartenenze né collegamenti frontend.
+`app_user` resta invariata, inclusa la colonna esistente `password`:
+l'integrazione con BCrypt usa quella colonna per gli hash dei nuovi account,
+senza convertire automaticamente i dati preesistenti. Per autenticazione,
+sessioni e configurazione del database vedere
+[`04-AUTENTICAZIONE.md`](04-AUTENTICAZIONE.md).
 
 `schema.sql` aggiunge solo tabelle e indici con `IF NOT EXISTS`, senza `DROP`,
 `TRUNCATE`, cancellazioni o inserimenti demo. La configurazione esistente
@@ -92,9 +96,12 @@ un aggiornamento né un upsert. L'ID generato viene assegnato al modello passato
 Per i soli membri attuali il chiamante filtra `memberActive`; non deve
 confonderlo con lo stato di attivazione dell'account.
 
-Le firme di `UserDAO` restano invariate (`findById`, `findByEmail`,
-`findByEmailAndPassword`, `save`, `update`, `findAll`). `UserDAOJDBC` usa ora
-`JdbcTemplate` per partecipare alle stesse transazioni degli altri DAO.
+`UserDAO` espone `findById`, `findByEmail`, `save`, `update` e `findAll`.
+Con l'integrazione BCrypt, `findByEmailAndPassword` è stato rimosso:
+`AuthService` normalizza l'email (trim e minuscolo), chiama `findByEmail`
+e verifica la password sull'hash con `BCryptPasswordEncoder.matches`.
+Gli altri chiamanti di `findByEmail` devono passare un'email già normalizzata.
+`UserDAOJDBC` usa `JdbcTemplate` per partecipare alle stesse transazioni degli altri DAO.
 Gli errori SQL non vengono più solo stampati e ignorati: tutti i DAO
 propagano `DataAccessException` runtime di Spring, ad esempio
 `DuplicateKeyException` o `DataIntegrityViolationException`. Una lettura senza
@@ -153,8 +160,9 @@ scartare gli oggetti preparati per l'operazione fallita.
 
 La suite automatizzata e le istruzioni riproducibili sono descritte in
 [`backend/TESTING.md`](../backend/TESTING.md). Il 14 novembre 2026 tutti i
-28 test sono passati su Java 21 e PostgreSQL 18, in uno schema isolato.
-Il database dell'applicazione non è stato modificato. Il seguente elenco
+28 test delle fondamenta e i 33 test dell'autenticazione sono passati su
+Java 21 e PostgreSQL 18, in schemi isolati. Il database dell'applicazione
+non è stato modificato. Il seguente elenco
 resta il riferimento per il collaudo delle integrazioni successive.
 
 1. Su un DB di sviluppo già popolato, applicare lo schema e verificare che gli
