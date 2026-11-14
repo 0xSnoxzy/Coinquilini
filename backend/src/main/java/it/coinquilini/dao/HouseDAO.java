@@ -6,5 +6,6 @@ public interface HouseDAO {
     void save(House house);
     House findById(Long id);
     House findByInviteCode(String inviteCode);
+    House findByInviteCodeForUpdate(String inviteCode);
     House findActiveByUserId(Long userId);
 }

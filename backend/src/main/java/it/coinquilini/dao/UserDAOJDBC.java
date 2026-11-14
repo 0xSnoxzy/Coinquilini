@@ -31,6 +31,11 @@ public class UserDAOJDBC implements UserDAO {
     }
 
     @Override
+    public User findByIdForUpdate(Long id) {
+        return first(jdbc.query("SELECT * FROM app_user WHERE id = ? FOR UPDATE", this::mapUser, id));
+    }
+
+    @Override
     public User findByEmail(String email) {
         String query = "SELECT * FROM app_user WHERE LOWER(TRIM(email)) = ?";
         return first(jdbc.query(query, this::mapUser, email));

@@ -51,6 +51,12 @@ public class HouseDAOJDBC implements HouseDAO {
     }
 
     @Override
+    public House findByInviteCodeForUpdate(String inviteCode) {
+        return first(jdbc.query("SELECT * FROM house WHERE invite_code = ? FOR UPDATE",
+                this::mapHouse, normalizeInviteCode(inviteCode)));
+    }
+
+    @Override
     public House findActiveByUserId(Long userId) {
         return first(jdbc.query("""
                 SELECT h.* FROM house h

@@ -45,6 +45,19 @@ public class MembershipDAOJDBC implements MembershipDAO {
     }
 
     @Override
+    public Membership findByHouseAndUser(Long houseId, Long userId) {
+        List<Membership> memberships = jdbc.query(
+                "SELECT * FROM membership WHERE house_id = ? AND user_id = ?",
+                this::mapMembership, houseId, userId);
+        return memberships.isEmpty() ? null : memberships.getFirst();
+    }
+
+    @Override
+    public void reactivateAsMember(Long membershipId) {
+        jdbc.update("UPDATE membership SET active = TRUE, role = 'MEMBER' WHERE id = ?", membershipId);
+    }
+
+    @Override
     public List<Member> findMembersByHouseId(Long houseId) {
         return jdbc.query("""
                 SELECT u.id, u.name, u.email, u.role, u.active, u.color, u.photo,

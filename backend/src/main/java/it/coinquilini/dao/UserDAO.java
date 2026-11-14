@@ -12,6 +12,9 @@ public interface UserDAO {
 
     User findById(Long id);
 
+    /** Blocca la riga fino al termine della transazione chiamante. */
+    User findByIdForUpdate(Long id);
+
     User findByEmail(String email);
 
     void save(User user);

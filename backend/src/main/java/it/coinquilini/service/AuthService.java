@@ -65,6 +65,15 @@ public class AuthService {
 
     /** Da riutilizzare negli endpoint autenticati: rilegge sempre lo stato dal DB. */
     public User currentUser(HttpSession session) {
+        return currentUser(session, false);
+    }
+
+    /** Da chiamare dentro una transazione per serializzare le modifiche dell'utente. */
+    public User currentUserForUpdate(HttpSession session) {
+        return currentUser(session, true);
+    }
+
+    private User currentUser(HttpSession session, boolean forUpdate) {
         if (session == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Nessuna sessione attiva.");
         }
@@ -73,7 +82,7 @@ public class AuthService {
             session.invalidate();
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sessione non valida. Effettua nuovamente il login.");
         }
-        User user = userDAO.findById(id);
+        User user = forUpdate ? userDAO.findByIdForUpdate(id) : userDAO.findById(id);
         if (user == null) {
             session.invalidate();
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Utente non più disponibile.");
