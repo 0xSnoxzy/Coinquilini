@@ -64,7 +64,7 @@ import { Store } from "../core/store";
         <div class="demo-note">
           <strong>Esplora l’interfaccia</strong>
           <p>
-            Moduli grafici: accesso e registrazione non sono ancora collegati.
+            Puoi anche esplorare le pagine con dati di esempio.
           </p>
           <div class="actions">
             @for (person of ["Antonio", "David", "Elisa", "Giovanna", "Admin", "Nuovo"]; track person) {

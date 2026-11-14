@@ -50,7 +50,9 @@ import { applyTheme } from "./core/theme";
                 ><span>⚙</span>Amministrazione</a
               >
             }
-            <button (click)="s.refresh()">↻ Ripristina anteprima</button>
+            <button (click)="s.refresh()" [disabled]="s.busy()">
+              ↻ {{ s.mode() === "demo" ? "Ripristina anteprima" : "Aggiorna dati" }}
+            </button>
           </nav>
           <div class="sidebar-bottom">
             <div class="member-row">
@@ -62,7 +64,9 @@ import { applyTheme } from "./core/theme";
                 }</span
               ><strong>{{ s.user()?.name }}</strong>
             </div>
-            <button (click)="s.logout()">Cambia profilo di esempio</button>
+            <button (click)="s.logout()" [disabled]="s.busy()">
+              {{ s.mode() === "demo" ? "Cambia profilo di esempio" : "Esci" }}
+            </button>
             @if (s.mode() === "demo") {
               <small class="demo-badge"
                 >Anteprima grafica · dati di esempio</small

@@ -4,9 +4,7 @@ import { Payload, Snapshot } from "./models";
 import { today, plusDays } from "./dates";
 import fixtures from "./fixtures.json";
 
-/** SOLO PRESENTAZIONE: nessuna API, password, persistenza o regola economica.
- * Sostituire questo servizio gradualmente seguendo docs/02-ROADMAP-E-COMMIT.md.
- */
+/** Autenticazione, profilo e casa reali; anteprime separate dai dati della sessione. */
 @Injectable({ providedIn: "root" })
 export class Store {
   readonly data = signal<Snapshot | null>(null);
@@ -14,7 +12,7 @@ export class Store {
   readonly ready = signal(false);
   readonly message = signal("");
   readonly error = signal("");
-  readonly mode = signal<"demo">("demo");
+  readonly mode = signal<"demo" | "live">("demo");
   readonly user = computed(() => this.data()?.user || null);
   readonly house = computed(() => this.data()?.house || null);
   readonly members = computed(() => this.data()?.members || []);
@@ -33,19 +31,15 @@ export class Store {
   private scene = "Antonio";
   private timer: ReturnType<typeof setTimeout> | undefined;
   async init() {
+    this.busy.set(true);
     try {
-      const res = await fetch("http://localhost:8080/api/auth/me", {
-        credentials: "include",
-      });
-      if (res.ok) {
-        const user = await res.json();
-        const base = this.fixture("Nuovo");
-        this.data.set({ ...base, user });
-      }
-    } catch {
-      // Backend non ancora avviato o nessuna sessione
+      await this.loadSnapshot();
+    } catch (e) {
+      if (!(e instanceof ApiError && e.status === 401)) this.fail(e);
+    } finally {
+      this.busy.set(false);
+      this.ready.set(true);
     }
-    this.ready.set(true);
   }
   private fixture(name: string): Snapshot {
     let json = JSON.stringify(fixtures);
@@ -54,143 +48,153 @@ export class Store {
     return (JSON.parse(json) as Record<string, Snapshot>)[name];
   }
   preview(name: string) {
-    this.scene = [
-      "Antonio",
-      "David",
-      "Elisa",
-      "Giovanna",
-      "Admin",
-      "Nuovo",
-    ].includes(name)
-      ? name
-      : "Antonio";
+    if (this.mode() === "live" && this.user()) return;
+    this.scene = ["Antonio", "David", "Elisa", "Giovanna", "Admin", "Nuovo"].includes(name)
+      ? name : "Antonio";
+    this.mode.set("demo");
     this.data.set(this.fixture(this.scene));
     this.error.set("");
     void this.router.navigateByUrl(this.scene === "Admin" ? "/admin" : "/");
   }
   async refresh() {
-    this.preview(this.scene);
-    this.notify("Dati ripristinati.");
-  }
-  async auth(
-    register: boolean,
-    name: string,
-    email: string,
-    password: string,
-  ) {
+    if (this.busy()) return;
+    if (this.mode() === "demo") {
+      this.preview(this.scene);
+      this.notify("Dati di esempio ripristinati.");
+      return;
+    }
+    this.busy.set(true);
     this.error.set("");
     try {
-      const endpoint = register ? "/api/auth/register" : "/api/auth/login";
-      const body = register ? { name, email, password } : { email, password };
-      const res = await fetch("http://localhost:8080" + endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(body),
-      });
-      const json = await res.json();
-      if (!res.ok) {
-        this.error.set(json.error || "Operazione non riuscita.");
-        return false;
-      }
+      await this.loadSnapshot();
+      this.notify("Dati aggiornati.");
+    } catch (e) {
+      this.fail(e);
+    } finally {
+      this.busy.set(false);
+    }
+  }
+  async auth(register: boolean, name: string, email: string, password: string) {
+    if (this.busy()) return false;
+    this.busy.set(true);
+    this.error.set("");
+    let authenticated = false;
+    try {
+      await this.request(register ? "auth/register" : "auth/login", "POST",
+        register ? { name, email, password } : { email, password });
+      authenticated = true;
+      await this.loadSnapshot();
       this.notify(register ? "Registrazione effettuata con successo!" : "Accesso effettuato!");
-      const base = this.fixture("Nuovo");
-      this.data.set({ ...base, user: json });
-      this.error.set("");
       void this.router.navigateByUrl("/");
       return true;
-    } catch {
-      this.error.set("Impossibile contattare il server backend sulla porta 8080.");
+    } catch (e) {
+      this.fail(authenticated
+        ? new Error("Accesso effettuato, ma i dati non sono stati caricati. Ricarica la pagina.")
+        : e);
       return false;
+    } finally {
+      this.busy.set(false);
     }
   }
   async logout() {
-    try {
-      await fetch("http://localhost:8080/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-    } catch {}
-    this.data.set(null);
+    if (this.busy()) return;
+    this.busy.set(true);
     this.error.set("");
-    void this.router.navigateByUrl("/");
+    try {
+      if (this.mode() === "live") await this.request("auth/logout", "POST");
+      this.data.set(null);
+      this.mode.set("demo");
+      this.message.set("");
+      void this.router.navigateByUrl("/");
+    } catch (e) {
+      this.fail(e);
+    } finally {
+      this.busy.set(false);
+    }
   }
-  async send(path: string, p: Payload, _message = "") {
+  async send(path: string, p: Payload, message = "") {
+    if (this.busy()) return false;
     this.error.set("");
     const state = this.data();
     if (!state) return false;
-    if (path === "profile/save") {
-      try {
-        const res = await fetch("http://localhost:8080/api/profile/save", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify(p),
-        });
-        const updated = await res.json();
-        if (!res.ok) {
-          this.error.set(updated.error || "Errore nel salvataggio profilo.");
-          return false;
-        }
-        const user = { ...state.user, ...updated };
-        this.data.set({
-          ...state,
-          user,
-          members: state.members.map((m) =>
-            m.id === user.id ? { ...m, ...user } : m,
-          ),
-        });
-        this.notify("Profilo aggiornato e salvato nel database!");
-        return true;
-      } catch {
-        this.error.set("Errore durante la connessione al server.");
+    if (this.mode() === "live") {
+      if (!["houses/create", "houses/join", "profile/save"].includes(path)) {
+        this.error.set("Questa funzione non è ancora collegata al database.");
         return false;
       }
+      this.busy.set(true);
+      let saved = false;
+      try {
+        await this.request(path, path === "profile/save" ? "PUT" : "POST", p);
+        saved = true;
+        await this.loadSnapshot();
+        this.notify(message || (path === "houses/create" ? "Casa creata!"
+          : path === "houses/join" ? "Sei entrato nella casa!" : "Profilo salvato."));
+        if (path.startsWith("houses/")) void this.router.navigateByUrl("/");
+        return true;
+      } catch (e) {
+        this.fail(saved
+          ? new Error("Operazione salvata. Impossibile aggiornare i dati: premi Aggiorna dati o ricarica la pagina.")
+          : e);
+        return false;
+      } finally {
+        this.busy.set(false);
+      }
     }
-    if (path === "houses/save") {
-      this.data.set({
-        ...state,
-        house: {
-          ...state.house!,
-          name: p["name"],
-          emoji: p["emoji"],
-          photo: p["photo"],
-        },
-      });
-      this.notify("Aspetto della casa aggiornato solo nell’anteprima.");
+    // Le anteprime non inviano scritture alle API reali.
+    if (path === "profile/save") {
+      const user = { ...state.user, ...p };
+      this.data.set({ ...state, user,
+        members: state.members.map((m) => m.id === user.id ? { ...m, ...user } : m) });
+    } else if (path === "houses/save") {
+      this.data.set({ ...state, house: { ...state.house!,
+        name: p["name"], emoji: p["emoji"], photo: p["photo"] } });
+    } else if (path === "shopping/toggle") {
+      this.data.set({ ...state, items: state.items.map((i) =>
+        i.id === p["id"] ? { ...i, bought: !!p["bought"] } : i) });
       return true;
-    }
-    if (path === "shopping/toggle") {
-      this.data.set({
-        ...state,
-        items: state.items.map((i) =>
-          i.id === p["id"] ? { ...i, bought: !!p["bought"] } : i,
-        ),
-      });
-      return true; // Stato visivo della checkbox, per aprire anche il modulo acquisto.
-    }
-    if (path === "houses/create" || path === "houses/join") {
+    } else if (path === "houses/create" || path === "houses/join") {
       const name = state.user.name;
       this.preview(path === "houses/create" ? "Antonio" : "David");
-      const s = this.data()!;
-      this.data.set({
-        ...s,
-        user: { ...s.user, name },
-        house: { ...s.house!, name: p["name"] || "Casa di esempio" },
-      });
-      this.notify(
-        "Casa di esempio: nessun account o invito reale è stato creato.",
-      );
-      return true;
-    }
-    if (path === "houses/leave") {
+      const demo = this.data()!;
+      this.data.set({ ...demo, user: { ...demo.user, name },
+        house: { ...demo.house!, name: p["name"] || "Casa di esempio" } });
+    } else if (path === "houses/leave") {
       this.preview("Nuovo");
-      return true;
     }
-    this.notify(
-      "Anteprima: questa modifica non viene salvata.",
-    );
+    this.notify("Anteprima: questa modifica non viene salvata nel database.");
     return true;
+  }
+  private async loadSnapshot() {
+    try {
+      const snapshot = await this.request<Snapshot>("snapshot");
+      this.data.set(snapshot);
+      this.mode.set("live");
+    } catch (e) {
+      if (e instanceof ApiError && (e.status === 401 || e.status === 403)) {
+        this.data.set(null);
+        this.mode.set("demo");
+      }
+      throw e;
+    }
+  }
+  private async request<T = unknown>(path: string, method = "GET", payload?: Payload): Promise<T> {
+    let response: Response;
+    try {
+      response = await fetch("http://localhost:8080/api/" + path, {
+        method,
+        credentials: "include",
+        ...(payload === undefined ? {} : {
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }),
+      });
+    } catch {
+      throw new Error("Impossibile contattare il server backend sulla porta 8080.");
+    }
+    const body = await response.json();
+    if (!response.ok) throw new ApiError(body.error || "Operazione non riuscita.", response.status);
+    return body as T;
   }
   fail(e: unknown) {
     this.error.set(e instanceof Error ? e.message : "Immagine non valida.");
@@ -240,5 +244,11 @@ export class Store {
       .drawImage(bitmap, 0, 0, canvas.width, canvas.height);
     bitmap.close();
     return canvas.toDataURL("image/jpeg", 0.82);
+  }
+}
+
+class ApiError extends Error {
+  constructor(message: string, readonly status: number) {
+    super(message);
   }
 }
