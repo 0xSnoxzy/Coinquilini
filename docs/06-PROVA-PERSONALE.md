@@ -1,7 +1,7 @@
 # Provare personalmente il lavoro già completato
 
 Ambiente aggiornato il 14 novembre 2026 con il flusso casa/inviti del branch
-`codex/casa-inviti-snapshot`, basato su main `301fde5`.
+`antonio/casa-inviti-snapshot`, basato su main `301fde5`.
 Frontend: http://localhost:3000 — backend: http://localhost:8080.
 I servizi sono stati lasciati avviati per la prova personale; non ripartono
 automaticamente dopo un riavvio del computer.

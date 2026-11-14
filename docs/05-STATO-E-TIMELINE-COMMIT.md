@@ -3,7 +3,7 @@
 Aggiornamento: **14 novembre 2026**, dopo il traguardo casa/inviti.
 Base condivisa: `main` a `301fde5`. Il traguardo verificato è stato diviso nei
 commit backend `34617fb` e frontend `5e8e6c0`, sul branch
-`codex/casa-inviti-snapshot`, pronto per il collaudo sul PC di David.
+`antonio/casa-inviti-snapshot`, pronto per il collaudo sul PC di David.
 Il riferimento da aggiornare a ogni commit è ora
 [Registro del gruppo](00-STATO-GRUPPO.md), con prossimo task di ogni membro e checklist.
 
@@ -45,9 +45,9 @@ soddisfatto. Il traguardo casa non ha modificato schema.sql o models.ts.
 | 4 | `f66a85c` | David | Fondamenta JDBC case/membri, transazioni e 28 test. | Integrato in main con il suo autore. |
 | 5 | `020ecbb` | snoxzy / Antonio | BCrypt, sessioni, profilo, configurazione DB esterna e 33 test. | Integrato in main. |
 | 6 | `301fde5` | snoxzy | Allineamento del contratto fondamenta a BCrypt. | Base main usata per il nuovo traguardo. |
-| 7 | `34617fb` | snoxzy / Antonio | Backend casa/inviti/snapshot e 26 test nuovi. | Branch `codex/casa-inviti-snapshot`, da integrare dopo collaudo/review. |
+| 7 | `34617fb` | snoxzy / Antonio | Backend casa/inviti/snapshot e 26 test nuovi. | Branch `antonio/casa-inviti-snapshot`, da integrare dopo collaudo/review. |
 | 8 | `5e8e6c0` | snoxzy / Antonio | Store Angular reale e separazione demo. | Stesso branch; da verificare sul PC di David. |
-| 9 | Questo commit di documentazione | snoxzy / Antonio | Registro condiviso, regola AGENTS e guide al collaudo. | Il riferimento corrente e i prossimi passi sono in `00-STATO-GRUPPO.md`. |
+| 9 | `a1e138b` | snoxzy / Antonio | Registro condiviso, regole CONTRIBUTING e guide al collaudo. | Il riferimento corrente e i prossimi passi sono in `00-STATO-GRUPPO.md`. |
 
 I primi tre commit sono del 26 settembre 2026; i successivi del 14 novembre.
 I dati delle vecchie password in chiaro non sono stati convertiti automaticamente.

@@ -17,3 +17,9 @@ nel documento stesso.
 Seguire lo stack e i vincoli autorizzati nel task: Java 21, Spring Boot,
 PostgreSQL e DAO JDBC. Preservare i dati e il lavoro locale degli altri membri.
 Non eseguire commit, push o merge senza l'autorizzazione del relativo task.
+
+## Nomi dei branch
+
+Usare il nome del responsabile seguito dal traguardo, ad esempio
+`antonio/casa-inviti-snapshot`, `david/spese-saldi-proxy`,
+`elisa/lista-spesa` o `giovanna/mansioni-avvisi`.

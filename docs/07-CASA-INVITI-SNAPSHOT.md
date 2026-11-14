@@ -1,7 +1,7 @@
 # Creazione casa, ingresso con invito e snapshot iniziale
 
 Stato del 14 novembre 2026: implementato sul branch
-`codex/casa-inviti-snapshot`, a partire dal main `301fde5`.
+`antonio/casa-inviti-snapshot`, a partire dal main `301fde5`.
 Backend nel commit `34617fb`, frontend nel commit `5e8e6c0`.
 La prova sul PC di David precede il merge: seguire e aggiornare il
 [Registro del gruppo](00-STATO-GRUPPO.md).

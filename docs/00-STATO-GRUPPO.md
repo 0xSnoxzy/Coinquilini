@@ -7,7 +7,7 @@ e aggiornarlo **nello stesso commit di ogni modifica**, anche di documentazione.
 ## Checkpoint corrente
 
 - Base condivisa: main `301fde5`, con fondamenta JDBC e autenticazione BCrypt.
-- Branch del traguardo: `codex/casa-inviti-snapshot`.
+- Branch del traguardo: `antonio/casa-inviti-snapshot`.
 - Backend casa/inviti/snapshot: **implementato e testato**.
 - Collegamento Angular: **implementato e collaudato**.
 - Verifiche locali del traguardo completo: **87 test passati**, build frontend,
@@ -18,6 +18,10 @@ e aggiornarlo **nello stesso commit di ogni modifica**, anche di documentazione.
   Fare pull di main non porta automaticamente il nuovo lavoro del branch.
 - Raccogliere l'esito di David prima del prossimo traguardo; correggere qui
   eventuali problemi di questo blocco.
+
+Convenzione dei branch: `antonio/<funzione>`, `david/<funzione>`,
+`elisa/<funzione>` e `giovanna/<funzione>`. Le regole del gruppo sono in
+[CONTRIBUTING.md](../CONTRIBUTING.md).
 
 Lo schema attuale ha tre tabelle: app_user, house, membership. Gli altri otto
 insiemi di dati di dominio sono ancora da implementare. Lo snapshot ha dati
@@ -66,7 +70,8 @@ iniziale. Non serve attendere tutta l'applicazione per integrare una milestone.
 | `301fde5` | Antonio | Contratto fondamenta allineato a BCrypt; base main. | Implementare M2a e snapshot iniziale. |
 | `34617fb` — feat(houses): creazione inviti e snapshot con test PostgreSQL | Antonio | API casa, DAO estesi, snapshot, vista pubblica e 26 test nuovi. | Collegare il frontend e verificare sul PC di David. |
 | `5e8e6c0` — feat(store): collega casa e membri alle API reali | Antonio | Store reale, ricaricamento, aggiornamento e demo separata. | Prova su PC David, poi review e merge. |
-| `questo commit` — docs: registro condiviso e collaudo sul PC di David | Antonio | Registro, regola di aggiornamento e guide riproducibili. | David esegue la checklist e il gruppo registra l'esito. |
+| `a1e138b` — docs: registro condiviso e collaudo sul PC di David | Antonio | Registro, regola di aggiornamento e guide riproducibili. | David esegue la checklist e il gruppo registra l'esito. |
+| `questo commit` — chore: uniforma nomi branch e documentazione del gruppo | Antonio | Nomi personali dei branch e regole in CONTRIBUTING.md; codice invariato. | Per tutti e quattro i membri i prossimi passi restano quelli della tabella: prima il collaudo sul PC di David. |
 
 «Questo commit» indica il commit che contiene quella versione del documento.
 Al successivo aggiornamento completare il riferimento precedente con l'hash
@@ -86,13 +91,13 @@ Dalla cartella del repository controllare prima il lavoro locale:
 ```bash
 git status --short
 git fetch origin
-git switch --track origin/codex/casa-inviti-snapshot
+git switch --track origin/antonio/casa-inviti-snapshot
 ```
 
 Lo switch sopra è per il primo checkout. Se il branch esiste già, usare:
 
 ```bash
-git switch codex/casa-inviti-snapshot
+git switch antonio/casa-inviti-snapshot
 git pull --ff-only
 ```
 
